@@ -81,8 +81,10 @@ KH_FEATURE_USER_MANAGEMENT_ADMIN = str(
 KH_FEATURE_USER_MANAGEMENT_PASSWORD = str(
     config("KH_FEATURE_USER_MANAGEMENT_PASSWORD", default="admin")
 )
-KH_ENABLE_ALEMBIC = False
-KH_DATABASE = f"sqlite:///{KH_USER_DATA_DIR / 'sql.db'}"
+
+##Changed for using POSTGRES
+KH_ENABLE_ALEMBIC = True
+KH_DATABASE = config("KH_DATABASE", default="sqlite:///{KH_USER_DATA_DIR / 'sql.db'}")
 KH_FILESTORAGE_PATH = str(KH_USER_DATA_DIR / "files")
 KH_WEB_SEARCH_BACKEND = (
     "kotaemon.indices.retrievers.tavily_web_search.WebSearch"

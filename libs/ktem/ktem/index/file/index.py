@@ -66,7 +66,7 @@ class FileIndex(BaseIndex):
                 {
                     "__tablename__": f"index__{self.id}__source",
                     "__table_args__": (
-                        UniqueConstraint("name", "user", name="_name_user_uc"),
+                        UniqueConstraint("name", "user", name=f"_name_user_uc_{self.id}_source"),
                     ),
                     "id": Column(
                         String,
@@ -130,7 +130,7 @@ class FileIndex(BaseIndex):
             {
                 "__tablename__": f"index__{self.id}__group",
                 "__table_args__": (
-                    UniqueConstraint("name", "user", name="_name_user_uc"),
+                    UniqueConstraint("name", "user", name=f"_name_user_uc_{self.id}_filegroup"),
                 ),
                 "id": Column(
                     String,

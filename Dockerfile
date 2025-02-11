@@ -43,7 +43,8 @@ RUN --mount=type=ssh  \
     --mount=type=cache,target=/root/.cache/pip  \
     pip install -e "libs/kotaemon" \
     && pip install -e "libs/ktem" \
-    && pip install "pdfservices-sdk@git+https://github.com/niallcm/pdfservices-python-sdk.git@bump-and-unfreeze-requirements"
+    && pip install "pdfservices-sdk@git+https://github.com/niallcm/pdfservices-python-sdk.git@bump-and-unfreeze-requirements" \
+    && pip install psycopg2-binary==2.9.10
 
 RUN --mount=type=ssh  \
     --mount=type=cache,target=/root/.cache/pip  \
@@ -101,14 +102,14 @@ RUN apt-get autoremove \
 ENTRYPOINT ["sh", "/app/launch.sh"]
 
 # Ollama-bundled version
-FROM full AS ollama
+#FROM full AS ollama
 
 # Install ollama
-RUN --mount=type=ssh  \
-    --mount=type=cache,target=/root/.cache/pip  \
-    curl -fsSL https://ollama.com/install.sh | sh
+#RUN --mount=type=ssh  \
+#    --mount=type=cache,target=/root/.cache/pip  \
+#    curl -fsSL https://ollama.com/install.sh | sh
 
 # RUN nohup bash -c "ollama serve &" && sleep 4 && ollama pull qwen2.5:7b
-RUN nohup bash -c "ollama serve &" && sleep 4 && ollama pull nomic-embed-text
+#RUN nohup bash -c "ollama serve &" && sleep 4 && ollama pull nomic-embed-text
 
-ENTRYPOINT ["sh", "/app/launch.sh"]
+#ENTRYPOINT ["sh", "/app/launch.sh"]
