@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  lite:
+    build:
+      context: .
+      target: lite
+      ssh:
+        - default
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"  # Adjust port as needed
+    restart: unless-stopped
+
+  full:
+    build:
+      context: .
+      target: full
+      ssh:
+        - default
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    ports:
+      - "7860:7860"  # Using different host port to avoid conflicts
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 8G  # Adjust based on your needs
+        reservations:
+          memory: 4G  # Adjust based on your needs
+
